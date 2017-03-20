@@ -75,7 +75,12 @@ public class ChangeMachine {
     int nickelChangeTotal = makeNickelChange(updatedCashTotal);
     updatedCashTotal -= (nickelChangeTotal * 0.05f);
     int pennyChangeTotal = makePennyChange(updatedCashTotal);
-    return String.format("Quarters: %d, Dimes: %d, Nickels: %d, Pennies: %d", quarterChangeTotal, dimeChangeTotal, nickelChangeTotal, pennyChangeTotal);
+    updatedCashTotal -= (pennyChangeTotal * 0.01f);
+    if (Math.abs(updatedCashTotal) < 0.01) {
+      return String.format("Here is your change. Quarters: %d, Dimes: %d, Nickels: %d, Pennies: %d", quarterChangeTotal, dimeChangeTotal, nickelChangeTotal, pennyChangeTotal);
+    } else {
+      return String.format("We did not have enough coins to make change for $%.2f", totalCash);
+    }
   }
 
 }
